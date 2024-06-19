@@ -12,7 +12,7 @@
 // }
 
 
-// gets(): function is used to read a line of text from the standard input .
+// gets(): function is used to read a string from the standard input .
 // puts(): function is used to write a string to the standard output .
 // #include <stdio.h>
 // int main() {

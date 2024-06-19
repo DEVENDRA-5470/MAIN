@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            background-color: red;
+            height: 300px;
+            width: 300px;
+            margin: 150px auto;
+            border: 2px solid red;
+            padding: 30px;
+
+
+        }
+        @media (max-width:600px){
+            .main{
+                background-color: blue;
+            } 
+            .main p{
+                color: white;
+            }
+
+            .parent{
+                flex-direction: column;
+            }
+            .b1{
+                box-shadow: 10px 20px 10px 15px red;
+            }
+           
+        }
+
+        @media (min-width:601px) and (max-width:1024px){
+            .main{
+                background-color: rgb(55, 255, 0);
+            } 
+            .main p{
+                font-size: 1.5rem;
+            }
+
+            .parent{
+                flex-direction: column;
+            }
+            .b1{
+                box-shadow: 10px 20px 10px 15px red;
+            }
+        }
+
+        @media (min-width:1025px) and (max-width:1440px){
+            .main{
+                background-color: rgb(255, 0, 191);
+                overflow: hidden;
+
+            } 
+            .main p{
+                font-size: 2rem;
+                color: greenyellow;
+            }
+            .b1{
+                box-shadow: 10px 5px 10px 10px  gray;
+            }
+        }
+
+
+            .parent{
+                display: flex;
+                margin: 20px;
+                
+            }
+        .b{
+            height: 250px;
+            width: 300px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 100%;
+        }
+        .b1{
+            background-color: greenyellow;
+        }
+        .b2{
+            background-color: rgb(255, 71, 47);
+        }
+        .b3{
+            background-color: rgb(47, 189, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Media query is a technique used to responsive your web page on different type of screen size -->
+
+    <!-- mobile phones max-width (600px)  -->
+    <!-- style tablets min-width (601px) and max-width(1024px) -->
+    <!-- style for laptops and small desktops min-width(1025px) max-width(1440px) -->
+    <!-- style for of large display min-width(1441px) -->
+
+
+    <!-- <div class="main">
+        <p>
+            mobile phones max-width (600px)  
+            style tablets min-width (601px) and max-width(1024px)
+            style for laptops and small desktops min-width(1025px) max-width(1440px)
+            style for of large display min-width(1441px)
+        </p>
+    </div> -->
+
+
+    <div class="parent">
+        <div class="b b1"> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, quibusdam!</div>
+        <div class="b b2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, illo.</div>
+        <div class="b b3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, commodi!</div>
+    </div>
+   
+
+</body>
