@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    char ch='1';
+    char ch='a';
     // Check if the input is a lowercase vowel
     if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
         printf("%c is a vowel.\n", ch);
