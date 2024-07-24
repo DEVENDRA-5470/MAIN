@@ -25,10 +25,21 @@
 //-------------------------Brackets
 // Brackets are used to find a range of characters:
 // [abc] : Find any of the characters a, b, or c.
+
 // [a-z] : Find any lowercase letter from a to z.
 // [A-Z] : Find any uppercase letter from A to Z.
+
 // [0-9] : Find any digit from 0 to 9.
+    // let str="dev@123dev87"
+    // let pattern=/[0-9]/g;
+    // console.log(str.match(pattern)); // ["d", "e", "v", "d", "
+
+
 // (x|y)	Find any of the alternatives specified
+   let=str='org,orange,mango,dev,aman,apple,abhay'
+   let pattern=/(mango|orange)/g;
+   console.log(str.match(pattern));
+
 // [a-zA-Z0-9] : Find any letter or digit from a to z,
 //               A to Z, or 0 to 9.
 // [^abc] : Find any character except a, b, or c.
@@ -97,3 +108,9 @@
 // ^n	Matches any string with n at the beginning of it
 // ?=n	Matches any string that is followed by a specific string n
 // ?!n	Matches any string that is not followed by a specific string n
+
+
+let d="name is dev"
+let pat=/[n]/g;
+let result=d.match(pat)
+console.log(result)
