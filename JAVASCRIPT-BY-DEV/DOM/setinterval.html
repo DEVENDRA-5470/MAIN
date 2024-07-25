@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+        }
+        #countdown{
+            font-size: 50px;
+            background-color: red;
+            width: 0%;
+            display: flex;
+            justify-content: center;
+        }
+        .t{
+            border: 1px solid gray;
+            background-color: azure;
+            width: 100%;
+            /* height: 100px; */
+            /* z-index: 1; */
+        }
+    </style>
+</head>
+<body>
+    <div class="t">
+    <div id="countdown">
+        0
+    </div>
+    </div>
+    <script>
+        let a=0;
+        let stop;
+        function count(){
+            a++;
+            console.log(a)
+           let d= document.getElementById("countdown");
+           d.style.width=a+"%";
+           d.innerHTML = `${a}+`
+            if (a===100){
+                clearInterval(stop)
+            }
+        }
+        stop=setInterval(count,10)
+    </script>
+
+</body>
+</html>

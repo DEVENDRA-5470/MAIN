@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="profile">
+        <img id="profile-pic" src="pexels-soldiervip-1374510.jpg" alt="Profile Picture" width="100" height="100">
+        <p id="username">John Doe</p>
+    </div>
+    <button onclick="up()" id="update-profile">Update Profile Picture</button>
+
+    
+    <script>
+        // Get the elements
+const profilePic = document.getElementById('profile-pic');
+const updateButton = document.getElementById('update-profile');
+
+// Function to update the profile picture
+function updateProfilePicture(newSrc, newAlt) {
+    // Set new attributes
+    profilePic.setAttribute('src', newSrc);
+    profilePic.setAttribute('alt', newAlt);
+    profilePic.style.width="200px";
+    profilePic.style.height="200px";
+    profilePic.style.borderRadius="50%";
+    
+    // Get and log the new attributes
+    console.log('New src:', profilePic.getAttribute('src')); // Outputs: "new-pic.jpg" (or whatever you set)
+    console.log('New alt:', profilePic.getAttribute('alt')); // Outputs: "New profile picture"
+}
+
+// Event listener to update the profile picture when the button is clicked
+function up(){
+    updateProfilePicture('pexels-sulimansallehi-1704488.jpg', 'New profile picture');
+};
+
+    </script>
+</body>
+</html>

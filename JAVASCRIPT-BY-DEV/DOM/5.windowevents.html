@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Events and Properties</title>
+</head>
+<body>
+    <h1>Window Events and Properties Example</h1>
+    <script>
+        // Window Events
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded');
+        });
+
+        window.addEventListener('unload', function() {
+            console.log('Page is unloading');
+        });
+
+        window.addEventListener('resize', function() {
+            console.log('Window resized');
+        });
+
+        window.addEventListener('scroll', function() {
+            console.log('Page scrolled');
+        });
+
+        window.addEventListener('beforeunload', function(event) {
+            event.preventDefault();
+            event.returnValue = '';
+        });
+
+        // Online/Offline Events
+        window.addEventListener('online', function() {
+            alert('You are now online.');
+        });
+
+        window.addEventListener('offline', function() {
+            alert('You are now offline.');
+        });
+
+        // Window Methods
+        function openWindow() {
+            window.open('https://www.example.com', '_blank');
+        }
+
+        function closeWindow() {
+            window.close();
+        }
+
+        function showAlert() {
+            window.alert('This is an alert message.');
+        }
+
+        function showConfirm() {
+            if (window.confirm('Are you sure?')) {
+                console.log('User clicked OK');
+            } else {
+                console.log('User clicked Cancel');
+            }
+        }
+
+        function showPrompt() {
+            var userInput = window.prompt('Please enter your name:');
+            console.log('User input:', userInput);
+        }
+
+        // Window Properties
+        console.log('Current URL:', window.location.href);
+        console.log('Browser Info:', window.navigator.userAgent);
+        console.log('Screen Width:', window.screen.width);
+        console.log('Screen Height:', window.screen.height);
+        console.log('Document Title:', window.document.title);
+        console.log('Document Title:', window.document.title);
+
+        // Changing the URL
+        function changeUrl() {
+            window.location.href = 'https://www.example.com';
+        }
+    </script>
+
+    <button onclick="openWindow()">Open Window</button>
+    <button onclick="closeWindow()">Close Window</button>
+    <button onclick="showAlert()">Show Alert</button>
+    <button onclick="showConfirm()">Show Confirm</button>
+    <button onclick="showPrompt()">Show Prompt</button>
+    <button onclick="changeUrl()">Change URL</button>
+</body>
+</html>

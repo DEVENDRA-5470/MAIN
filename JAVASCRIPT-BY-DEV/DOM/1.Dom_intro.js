@@ -46,9 +46,9 @@
 
 // 2. **DOM Tree**
 //    - Nodes and node types
-//      - Element nodes
-//      - Attribute nodes
-//      - Text nodes
+//      - Element nodes(p,a,div,section)
+//      - Attribute nodes(id,class)
+//      - Text nodes(These represent the actual text content inside an element node. For example, in <p>Hello, world!</p>, "Hello, world!" is a text node.)
 //    - Hierarchical structure
 
 // 3. **Accessing DOM Elements**

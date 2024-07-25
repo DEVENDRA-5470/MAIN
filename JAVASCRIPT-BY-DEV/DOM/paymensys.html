@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Processing Simulation</title>
+    <style>
+        #myButton {
+            padding: 10px 20px;
+            background-color: blue; /* Initial color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 2s; /* Smooth transition for color fade */
+        }
+        #myButton.processing {
+            background-color: gray; /* Color when processing */
+            cursor: wait;
+        }
+        #progressContainer {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        #progressBar {
+            height: 20px;
+            width: 0%;
+            background-color: green;
+            transition: width 0.1s;
+        }
+        #progressBar.failed {
+            background-color: rgb(245, 18, 2); /* Red color for failed state */
+        }
+        #message {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        #message.success {
+            color: green; /* Success message color */
+        }
+        #message.error {
+            color: red; /* Error message color */
+        }
+
+        #payment {
+            margin: auto;
+            background-color: rgb(197, 196, 196);
+            width: 50%;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<section id="payment">
+    <h2>Payment Processing Simulation</h2>
+
+    <label for="priceInput">Enter Price ($):</label>
+    <input type="number" id="priceInput" min="0" step="0.01" placeholder="Enter price here">
+    <button id="myButton">Click Me!</button>
+    <div id="progressContainer">
+        <div id="progressBar"></div>
+    </div>
+    <div id="message"></div>
+</section>
+
+<script>
+    const button = document.getElementById('myButton');
+    const progressBar = document.getElementById('progressBar');
+    const message = document.getElementById('message');
+    const priceInput = document.getElementById('priceInput');
+
+    function handleClick(event) {
+        const price = parseFloat(priceInput.value); // Get the price from input
+        
+        if (isNaN(price) || price <= 0) {
+            message.textContent = 'Please enter a valid price';
+            message.className = 'error'; // Apply error style
+            progressBar.style.width = '0%'; // Reset progress bar width
+            progressBar.className = ''; // Reset progress bar class
+            button.style.backgroundColor = 'blue'; // Reset button color
+            return; // Exit the function early
+        }
+
+        // Change button to processing state and disable it
+        button.classList.add('processing');
+        button.disabled = true;
+        message.textContent = 'Payment is processing...'; // Initial processing message
+        message.className = ''; // Remove any previous message style
+        console.log('Button disabled for processing');
+        
+        // Simulate payment processing with a progress bar
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 2; // Increment progress
+            progressBar.style.width = `${progress}%`; // Update progress bar width
+
+            if (progress >= 100) {
+                clearInterval(interval); // Stop the interval
+                button.classList.remove('processing');
+
+                if (price < 100) {
+                    // Payment failed
+                    progressBar.className = 'failed'; // Apply failed style
+                    message.textContent = 'Payment failed. Price is less than $100. Please Refresh Page';
+                    message.className = 'error'; // Apply error style
+                    button.style.backgroundColor = 'red'; // Indicate failure
+                } else {
+                    // Payment succeeded
+                    button.disabled = false;
+                    button.style.backgroundColor = 'green'; // Change color to green to indicate success
+                    message.textContent = 'Payment processed successfully!'; // Success message
+                    message.className = 'success'; // Apply success style
+                }
+                
+                // Fade button color back to the initial color after a delay
+                setTimeout(() => {
+                    button.style.backgroundColor = 'blue'; // Fade back to the initial color
+                }, 2000); // Adjust time as needed
+                
+                console.log('Payment processing complete');
+            }
+        }, 100); // Update every 100ms
+    }
+
+    // Add the event listener initially
+    button.addEventListener('click', handleClick);
+</script>
+
+</body>
+</html>

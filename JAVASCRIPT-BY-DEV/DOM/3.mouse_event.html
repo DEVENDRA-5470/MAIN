@@ -1,0 +1,129 @@
+<!-- Each event type provides specific functionality that you can handle in your JavaScript code to create dynamic and interactive web applications. -->
+
+<!-- => 1. Mouse Events
+
+- `click`: Fired when a mouse button is clicked on an element.
+- `dblclick`: Fired when a mouse button is double-clicked on an element.
+- `mousedown`: Fired when a mouse button is pressed down on an element.
+- `mouseup`: Fired when a mouse button is released on an element.
+- `mouseover`: Fired when the mouse pointer moves over an element.
+- `mouseout`: Fired when the mouse pointer moves out of an element.
+- `mousemove`: Fired when the mouse pointer moves while it is over an element. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events Example</title>
+    <style>
+        #eventBox {
+            width: 600px;
+            height: 400px;
+            background-color:white;
+            margin: 20px auto;
+            border: 2px solid #000;
+            position: relative;
+        }
+        .dot {
+            width: 5px;
+            height: 5px;
+            background-color: #000;
+            position: absolute;
+            border-radius: 50%;
+        }
+        #log {
+            width: 600px;
+            margin: 20px auto;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="eventBox">Interact with me!</div>
+<div id="log"></div>
+
+<script>
+    const eventBox = document.getElementById('eventBox');
+    const log = document.getElementById('log');
+
+    let isDrawing = false;
+    let color = '#000';
+
+    function logEvent(event) {
+        const message = `${event.type} event fired at (${event.clientX}, ${event.clientY})`;
+        const newLog = document.createElement('p');
+        newLog.textContent = message;
+        log.appendChild(newLog);
+    }
+
+    // click event
+    eventBox.addEventListener('click', (event) => {
+        logEvent(event);
+        if (!isDrawing) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.style.backgroundColor = color;
+            dot.style.left = `${event.clientX - eventBox.offsetLeft}px`;
+            dot.style.top = `${event.clientY - eventBox.offsetTop}px`;
+            eventBox.appendChild(dot);
+        }
+    });
+
+    // dblclick event
+    eventBox.addEventListener('dblclick', (event) => {
+        logEvent(event);
+        color = `#${Math.floor(Math.random() * 16777215).toString(16)}`; // Random color
+        eventBox.style.borderColor = color;
+    });
+
+    // mousedown event
+    eventBox.addEventListener('mousedown', (event) => {
+        logEvent(event);
+        isDrawing = true;
+    });
+
+    // mouseup event
+    eventBox.addEventListener('mouseup', (event) => {
+        logEvent(event);
+        isDrawing = false;
+    });
+
+    // mouseover event
+    eventBox.addEventListener('mouseover', (event) => {
+        logEvent(event);
+        // eventBox.style.backgroundColor = '#e0e0e0';
+        eventBox.style.cursor="crosshair"
+    });
+
+    // mouseout event
+    eventBox.addEventListener('mouseout', (event) => {
+        logEvent(event);
+        // eventBox.style.backgroundColor = '#f0f0f0';
+    });
+
+    // mousemove event
+    eventBox.addEventListener('mousemove', (event) => {
+        logEvent(event);
+        if (isDrawing) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.style.backgroundColor = color;
+            dot.style.left = `${event.clientX - eventBox.offsetLeft}px`;
+            dot.style.top = `${event.clientY - eventBox.offsetTop}px`;
+            eventBox.appendChild(dot);
+        }
+    });
+
+    // contextmenu event
+    eventBox.addEventListener('contextmenu', (event) => {
+        event.preventDefault(); // Prevent the context menu from appearing
+        logEvent(event);
+        eventBox.style.backgroundColor = '#ffcccb'; // Light red background to indicate right-click
+    });
+</script>
+
+</body>
+</html>
+

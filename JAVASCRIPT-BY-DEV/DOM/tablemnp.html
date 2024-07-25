@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" id="t1"></table>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the table by its ID
+            var table = document.getElementById("t1");
+        
+            // Create thead element
+            var thead = document.createElement('thead');
+        
+            // Create a new row for the header
+            var headerRow = document.createElement('tr');
+        
+            // Create header cells (th)
+            var headerCell1 = document.createElement('th');
+            var headerCell2 = document.createElement('th');
+            var headerCell3 = document.createElement('th');
+            var headerCell4 = document.createElement('th');
+            var headerCell5 = document.createElement('th');
+        
+            // Set the content of the header cells
+            headerCell1.innerHTML = 'Header 1';
+            headerCell2.innerHTML = 'Header 2';
+            headerCell3.innerHTML = 'Header 3';
+            headerCell4.innerHTML = 'Header 4';
+            headerCell5.innerHTML = 'Header 5';
+        
+            // Append header cells to the row
+            headerRow.appendChild(headerCell1);
+            headerRow.appendChild(headerCell2);
+            headerRow.appendChild(headerCell3);
+            headerRow.appendChild(headerCell4);
+            headerRow.appendChild(headerCell5);
+        
+            // Append the row to thead
+            thead.appendChild(headerRow);
+        
+            // Append thead to the table
+            table.insertBefore(thead, table.firstChild);
+            table.insertBefore(thead, table.lastChild);
+        
+            // Log the new thead and its content
+            console.log(thead);
+            console.log(headerCell1);
+            console.log(headerCell2);
+        });
+        </script>
+        
+</body>
+</html>

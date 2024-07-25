@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #inputField {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- 2. Keyboard Events
+
+- `keydown`: Fired when a key is pressed down.
+- `keyup`: Fired when a key is released.
+- `keypress`: Fired when a key is pressed and released. Note: `keypress` is deprecated and should be avoided in favor of `keydown` and `keyup`. -->
+
+    <input type="text" id="inputField" placeholder="Type something here..." />
+    <p id="output"></p>
+
+    <script>
+        const inputField = document.getElementById('inputField');
+        const output = document.getElementById('output');
+
+        // Event listener for keydown
+        inputField.addEventListener('keydown', (event) => {
+            output.textContent = `Key down: ${event.key}`;
+            console.log(`Key down: ${event.key}`);
+        });
+
+        // Event listener for keyup
+        inputField.addEventListener('keyup', (event) => {
+            output.textContent = `Key up: ${event.key}`;
+            if (event.key===''){
+                inputField.style.background="red";
+            }
+            else{
+                inputField.style.background="white";
+                }
+            console.log(`Key up: ${event.key}`);
+        });
+
+        // Event listener for keypress (deprecated)
+        inputField.addEventListener('keypress', (event) => {
+            output.textContent = `Key press: ${event.key}`;
+            console.log(`Key press: ${event.key}`);
+        });
+    </script>
+
+
+</body>
+</html>

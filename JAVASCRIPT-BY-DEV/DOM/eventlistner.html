@@ -1,0 +1,140 @@
+<!-- Event listeners are fundamental in creating interactive and dynamic web applications by allowing you to respond to user actions and other events. -->
+
+
+<!-- An event listener in JavaScript is a function that waits for a specific event to occur on a particular element and executes a piece of code when that event is triggered. It allows you to respond to user interactions or other events in the web page, such as clicks, mouse movements, key presses, or form submissions. -->
+
+
+
+
+Each event type provides specific functionality that you can handle in your JavaScript code to create dynamic and interactive web applications.
+
+<!-- => 1. Mouse Events
+
+- `click`: Fired when a mouse button is clicked on an element.
+- `dblclick`: Fired when a mouse button is double-clicked on an element.
+- `mousedown`: Fired when a mouse button is pressed down on an element.
+- `mouseup`: Fired when a mouse button is released on an element.
+- `mouseover`: Fired when the mouse pointer moves over an element.
+- `mouseout`: Fired when the mouse pointer moves out of an element.
+- `mousemove`: Fired when the mouse pointer moves while it is over an element.
+- `contextmenu`: Fired when the right mouse button is clicked, usually to show a context menu.
+
+=> 2. Keyboard Events
+
+- `keydown`: Fired when a key is pressed down.
+- `keyup`: Fired when a key is released.
+- `keypress`: Fired when a key is pressed and released. Note: `keypress` is deprecated and should be avoided in favor of `keydown` and `keyup`.
+
+=> 3. Form Events
+
+- `submit`: Fired when a form is submitted.
+- `change`: Fired when the value of an input, select, or textarea element is changed.
+- `input`: Fired when the value of an `<input>`, `<textarea>`, or `<select>` element is changed, in real-time.
+- `focus`: Fired when an element gains focus (e.g., when a user clicks or tabs into an input field).
+- `blur`: Fired when an element loses focus.
+
+=> 4. Window Events
+
+- `load`: Fired when the whole page (including all dependent resources such as stylesheets and images) has finished loading.
+- `unload`: Fired when the document or a resource is being unloaded (e.g., when navigating away from the page).
+- `resize`: Fired when the browser window is resized.
+- `scroll`: Fired when the user scrolls the content of an element or the window.
+- `beforeunload`: Fired when the window, the document, or a resource is about to be unloaded. Often used to show a confirmation dialog before the user leaves the page.
+
+=> 5. Touch Events
+
+- `touchstart`: Fired when a touch point is placed on the touch surface.
+- `touchmove`: Fired when a touch point is moved along the touch surface.
+- `touchend`: Fired when a touch point is removed from the touch surface.
+- `touchcancel`: Fired when the touch event is interrupted, such as when the user moves the finger out of the viewport.
+
+=> 6. Drag Events
+
+- `drag`: Fired repeatedly while an element is being dragged.
+- `dragstart`: Fired when the user starts dragging an element.
+- `dragend`: Fired when the user finishes dragging an element.
+- `dragenter`: Fired when a dragged element enters a drop target.
+- `dragleave`: Fired when a dragged element leaves a drop target.
+- `dragover`: Fired when a dragged element is over a drop target.
+- `drop`: Fired when a dragged element is dropped onto a drop target.
+
+=> 7. Media Events
+
+- `play`: Fired when a media element (e.g., video or audio) begins playing.
+- `pause`: Fired when a media element is paused.
+- `ended`: Fired when the media element has reached the end of playback.
+- `volumechange`: Fired when the volume of a media element is changed.
+- `timeupdate`: Fired when the current playback position of a media element changes.
+
+=> 8. Animation and Transition Events
+
+- `animationstart`: Fired when a CSS animation starts.
+- `animationend`: Fired when a CSS animation ends.
+- `animationiteration`: Fired when a CSS animation iteration completes.
+- `transitionstart`: Fired when a CSS transition starts.
+- `transitionend`: Fired when a CSS transition ends.
+
+=> 9. Other Events
+
+- `error`: Fired when an error occurs while loading a resource (e.g., an image fails to load).
+- `focusin`: Fired when an element gains focus, including child elements.
+- `focusout`: Fired when an element loses focus, including child elements.
+- `input`: Fired when the value of an `<input>`, `<textarea>`, or `<select>` element is changed. -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disable and Re-enable Button</title>
+    <style>
+        #myButton {
+            padding: 10px 20px;
+            background-color: blue; /* Initial color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #myButton.disabled {
+            background-color: red; /* Color when disabled */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<button id="myButton">Click Me!</button>
+
+<script>
+    const button = document.getElementById('myButton');
+
+    function handleClick(event) {
+        alert('Button clicked!');
+        
+        // Change button color to red and disable it
+        button.classList.add('disabled');
+        button.disabled = true;
+        console.log('Event listener removed');
+        
+        // Remove the event listener
+        button.removeEventListener('click', handleClick);
+        
+        // Re-enable the button and change its color after 5 seconds
+        setTimeout(() => {
+            button.classList.remove('disabled');
+            button.disabled = false;
+            button.addEventListener('click', handleClick);
+            button.style.backgroundColor = 'green'; // Change color to green
+            console.log('Event listener re-added');
+        }, 5000);
+    }
+
+    // Add the event listener initially
+    button.addEventListener('click', handleClick);
+</script>
+
+</body>
+</html>

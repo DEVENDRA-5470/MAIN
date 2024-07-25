@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1</title>
+</head>
+<body>
+    <h1>Page 1</h1>
+    <button id="loadContent">Load Content from Page 2</button>
+    <div id="content">Content from Page 2 will appear here.</div>
+
+    <script>
+        document.getElementById('loadContent').addEventListener('click', function() {
+            fetch('page2.html')
+                .then(response => response.text())
+                .then(data => {
+                    // Assuming you want to extract a specific part from page2.html
+                    // You might want to use a DOM parser to fetch a specific element's content.
+                    // For simplicity, here we insert the whole content.
+                    document.getElementById('content').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading content:', error);
+                });
+        });
+    </script>
+</body>
+</html>

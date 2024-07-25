@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Table Manipulation</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main div{
+            margin-left: 20px;
+
+        }
+        .main button{
+            margin-top: 18px;
+        }
+        .main input,button{
+            width: 100%;
+        }
+        .main ul{
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Student Scores</h2>
+
+    <table id="scoresTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Math</th>
+                <th>Science</th>
+                <th>English</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+   <div class="main">
+    <div>
+        Name: <br> <input type="text" id="addName">
+
+    </div>
+    <div>
+        Math: <br> <input type="number" id="addMath">
+
+    </div>
+
+    <div>
+        Science: <br> <input type="number" id="addScience">
+
+    </div>
+    <div>
+
+        English: <br> <input type="number" id="addEnglish">
+    </div>
+    <div>
+        <ul>
+            <li><button onclick="addStudent()">Add Student</button> </li>
+            <li> <button onclick="delete_student()">Delete Rows</button></li>
+            <li> <button onclick="delete_student_name()">Delete By Name</button></li>
+            <li><button onclick="edit_student()">EDIT STUDENT DETAIL</button></li>
+        </ul>
+
+    </div>
+</div> 
+
+
+
+    <script>
+        // Function to add a new student
+        function addStudent() {
+            let name = document.getElementById('addName').value;
+            let math = document.getElementById('addMath').value;
+            let science = document.getElementById('addScience').value;
+            let english = document.getElementById('addEnglish').value;
+
+            if (name && math && science && english) {
+                let table = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+                let newRow = table.insertRow();
+                newRow.insertCell(0).innerText = name;
+                newRow.insertCell(1).innerText = math;
+                newRow.insertCell(2).innerText = science;
+                newRow.insertCell(3).innerText = english;
+
+                // Clear input fields
+                document.getElementById('addName').value = '';
+                document.getElementById('addMath').value = '';
+                document.getElementById('addScience').value = '';
+                document.getElementById('addEnglish').value = '';
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+
+
+        // Delete A student
+        function delete_student() {
+            let table = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+            let rows = table.rows.length;
+            if (rows > 0) {
+                table.deleteRow(rows - 1);
+                } else {
+                    alert('No more students to delete.');
+                    }
+                    
+        }
+
+        // Delete by name
+        function delete_student_name() {
+            let name = document.getElementById('addName').value;
+            let table = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+            let rows = table.rows.length;
+            for (let i = 0; i < rows; i++) {
+                let row = table.rows[i];
+                if (row.cells[0].innerText == name) {
+                    table.deleteRow(i);
+                    let name = document.getElementById('addName').value ="";
+                    break;
+                    }
+                    else{
+                        alert('Student not found.');
+                        break;
+                    }
+                 
+                            
+            }
+        }
+
+        // Edit data 
+        function edit_student() {
+            let table = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+            let rows = table.rows.length;
+            if (rows > 0) {
+                let name = document.getElementById('addName').value;
+                let math = document.getElementById('addMath').value;
+                let science = document.getElementById('addScience').value;
+                let english = document.getElementById('addEnglish').value;
+                let row = table.rows[rows - 1];
+                row.cells[0].innerText = name;
+                row.cells[1].innerText = math;
+                row.cells[2].innerText = science;
+                row.cells[3].innerText = english;
+                document.getElementById('addName').value ="";
+                document.getElementById('addMath').value ="";
+                document.getElementById('addScience').value ="";
+                document.getElementById('addEnglish').value ="";
+                alert('Student data updated.');
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>

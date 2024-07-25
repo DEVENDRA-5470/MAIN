@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="example"><p>Hello <b>world</b></p></div>
+
+
+
+<script>
+const element = document.getElementById('example');
+
+console.log(element.innerHTML);  // Outputs: "<p>Hello <b>world</b></p>"
+console.log(element.textContent); // Outputs: "Hello world"
+</script>
+</body>
+</html>
