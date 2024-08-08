@@ -1,120 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Row Click and Hover</title>
+    <title>Task Management App</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
         table, th, td {
             border: 1px solid black;
-        }
-        th, td {
+            border-collapse: collapse;
             padding: 8px;
-            text-align: left;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0;
-            box-sizing: border-box;
-        }
-        tr.selected {
-            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
+    <h1>Task Management App</h1>
+    <form id="taskForm">
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName">
+        <br>
+        <label for="taskDescription">Task Description:</label>
+        <input type="text" id="taskDescription" name="taskDescription">
+        <br>
+        <button type="button" onclick="addTask()">Add Task</button>
+        <button type="button" onclick="updateTask()">Update Task</button>
+    </form>
 
-<h2>Table with Clickable and Hoverable Rows</h2>
+    <h2>Tasks</h2>
+    <table id="taskTable">
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Task Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-<table id="dataTable">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Score</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>John Doe</td>
-            <td>25</td>
-            <td>88</td>
-        </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>30</td>
-            <td>92</td>
-        </tr>
-        <tr>
-            <td>Emily Jones</td>
-            <td>22</td>
-            <td>95</td>
-        </tr>
-    </tbody>
-</table>
+    <script>
+        let selectedTaskIndex = null;
 
-<h2>Row Data</h2>
-<form id="rowDataForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name"><br><br>
-    <label for="age">Age:</label>
-    <input type="text" id="age" name="age"><br><br>
-    <label for="score">Score:</label>
-    <input type="text" id="score" name="score"><br><br>
-</form>
+       
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks'));
+            console.log(typeof(tasks),tasks)
+            const taskTableBody = document.querySelector('#taskTable tbody');
+            taskTableBody.innerHTML = '';
 
-<button onclick="selectRow(0)">Select Row 1</button>
-<button onclick="selectRow(1)">Select Row 2</button>
-<button onclick="selectRow(2)">Select Row 3</button>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.getElementById('dataTable');
-        const form = document.getElementById('rowDataForm');
-        let selectedRow = null;
-
-        function populateForm(row) {
-            if (row) {
-                const cells = row.getElementsByTagName('td');
-                if (cells.length > 0) {
-                    form.name.value = cells[0].innerText;
-                    form.age.value = cells[1].innerText;
-                    form.score.value = cells[2].innerText;
-                }
-            }
+            tasks.forEach((task, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${task.name}</td>
+                    <td>${task.description}</td>
+                    <td>
+                        <button onclick="editTask(${index})">Edit</button>
+                        <button onclick="deleteTask(${index})">Delete</button>
+                    </td>
+                `;
+                taskTableBody.appendChild(row);
+            });
         }
 
-        function selectRow(rowIndex) {
-            // Remove the selected class from the previously selected row
-            if (selectedRow) {
-                selectedRow.classList.remove('selected');
+        function addTask() {
+            const taskName = document.getElementById('taskName').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+
+            if (!taskName || !taskDescription) {
+                alert("Please enter both task name and description.");
+                return;
             }
 
-            const rows = table.querySelectorAll('tbody tr');
-            if (rowIndex >= 0 && rowIndex < rows.length) {
-                selectedRow = rows[rowIndex];
-                selectedRow.classList.add('selected');
-                populateForm(selectedRow);
-            }
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push({ name: taskName, description: taskDescription });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            document.getElementById('taskName').value = '';
+            document.getElementById('taskDescription').value = '';
+
+            loadTasks();
         }
 
-        // Bind click events to table rows for selection
-        table.addEventListener('click', function(event) {
-            const row = event.target.closest('tr');
-            if (row && row.parentElement.tagName === 'TBODY') {
-                selectRow(Array.from(row.parentElement.children).indexOf(row));
+        function editTask(index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            selectedTaskIndex = index;
+            document.getElementById('taskName').value = tasks[index].name;
+            document.getElementById('taskDescription').value = tasks[index].description;
+        }
+
+        function updateTask() {
+            const taskName = document.getElementById('taskName').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+
+            if (selectedTaskIndex === null) {
+                alert("Please select a task to update.");
+                return;
             }
-        });
 
-        // Example usage: Automatically select the first row when the page loads
-        selectRow(0); // Selects the first row in tbody (index starts at 0)
-    });
-</script>
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks[selectedTaskIndex] = { name: taskName, description: taskDescription };
+            localStorage.setItem('tasks', JSON.stringify(tasks));
 
+            document.getElementById('taskName').value = '';
+            document.getElementById('taskDescription').value = '';
+            selectedTaskIndex = null;
+
+            loadTasks();
+        }
+
+        function deleteTask(index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            loadTasks();
+        }
+    </script>
 </body>
 </html>

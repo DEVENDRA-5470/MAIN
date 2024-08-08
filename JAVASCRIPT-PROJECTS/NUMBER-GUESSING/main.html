@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  input{
+    margin-left: 10px;
+    padding: 10px 50px;
+   
+  }
+  button{
+    width: 25%;
+    margin-left: 10px;
+    padding: 10px 50px;
+  }
+</style>
+<body>
+  <div style="display: flex; justify-content: center; margin-top: 29px;">
+    <input type="number" value="" id="input1" placeholder="Guessing Number">
+    <input type="number" value="0" name="" id="input2">
+    
+  </div>
+  <div style="display: flex; justify-content: center; margin-top: 10px; ">
+   
+    <button onclick="start()">Play</button>
+    <button onclick="reset()">Reset</button>
+    
+  </div>
+  <div style="display: flex; justify-content: center; margin-top: 10px; ">
+   
+    <button >Player 1 <b id="total"></b>  </button>
+    <button >Player 2 <b id="total_l"></b> </button>
+    
+  </div>
+  <div>
+    <div style="display: flex; justify-content: center; margin-top: 10px; color: aliceblue;" id="result">
+      
+    </div>
+  </div>
+
+  <script>
+    let total_win=[]
+    let total_loss=[]
+    let res = document.getElementById("result");
+    function play(){
+      const input1 = document.getElementById('input1');
+      let input2 = document.getElementById('input2');
+      const input2Value = Math.floor(Math.random() * 100) ;
+
+      if (input1.value){
+        input2.value=parseInt(input2Value)
+
+        if(parseInt(input1.value)==parseInt(input2.value)){
+        res.innerText="Match Draw"
+      } 
+
+      else if(parseInt(input1.value)>parseInt(input2.value)){
+        total()
+        res.innerText="Player 1 Wins"
+        total_win.push(1)
+        document.body.style.backgroundColor="green"
+      }
+
+      else{
+        res.innerText="Player 2 Wins"
+        total_l()
+        total_loss.push(1)
+        document.body.style.backgroundColor="red"
+        }
+      }else{
+        alert("Provide correct Value ❌")
+
+      }
+
+     
+    }
+    function reset(){
+      document.getElementById('input1').value = ''
+      document.getElementById('input2').value = 0
+      res.innerText=""
+      document.body.style.backgroundColor="gray"
+
+      }
+      function total(){
+        let total = 1
+        for (let i = 0; i < total_win.length; i++) {
+          total += total_win[i]
+          }
+          document.getElementById("total").innerText=total
+          
+      }
+      function total_l(){
+        let total = 1
+        for (let i = 0; i < total_loss.length; i++) {
+          total += total_loss[i]
+          }
+          document.getElementById("total_l").innerText=total
+      }
+
+      function start() {
+    for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+            play();
+        }, i * 1000); // calls play() after i * 1000 milliseconds
+    }
+}
+
+    
+  </script>
+</body>
+</html>

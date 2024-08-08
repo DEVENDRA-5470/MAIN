@@ -1,0 +1,59 @@
+<!-- => 3. Form Events
+
+- `submit`: Fired when a form is submitted.
+- `change`: Fired when the value of an input, select, or textarea element is changed.
+- `input`: Fired when the value of an `<input>`, `<textarea>`, or `<select>` element is changed, in real-time.
+- `focus`: Fired when an element gains focus (e.g., when a user clicks or tabs into an input field).
+- `blur`: Fired when an element loses focus. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Events Example</title>
+</head>
+<body>
+  <form id="myForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username">
+    <br><br>
+    
+    <label for="mySelect">Choose an option:</label>
+    <select id="mySelect">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+    </select>
+    <br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    // Submit event
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      alert('Form submitted!');
+    });
+
+    // Change event
+    document.getElementById('mySelect').addEventListener('change', function() {
+      alert('Selection changed to: ' + this.value);
+    });
+
+    // Input event
+    document.getElementById('username').addEventListener('input', function() {
+      console.log('Current value: ' + this.value);
+    });
+
+    // Focus event
+    document.getElementById('username').addEventListener('focus', function() {
+      console.log('Input field is focused');
+    });
+
+    // Blur event
+    document.getElementById('username').addEventListener('blur', function() {
+      console.log('Input field lost focus');
+    });
+  </script>
+</body>
+</html>

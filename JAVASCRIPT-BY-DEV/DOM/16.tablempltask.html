@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Table Manipulation</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main div {
+            margin-left: 20px;
+        }
+
+        .main button {
+            margin-top: 18px;
+        }
+
+        .main input,
+        button {
+            width: 100%;
+        }
+
+        .main ul {
+            list-style: none;
+        }
+
+        .selected {
+            background-color: #ffeb3b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Student Scores</h2>
+
+    <table id="scoresTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Math</th>
+                <th>Science</th>
+                <th>English</th>
+                <th>Total</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div class="main">
+        <div>
+            Name: <br> <input type="text" id="addName">
+        </div>
+        <div>
+            Math: <br> <input type="number" id="addMath">
+        </div>
+        <div>
+            Science: <br> <input type="number" id="addScience">
+        </div>
+        <div>
+            English: <br> <input type="number" id="addEnglish">
+        </div>
+        <div>
+            <ul>
+                <li><button onclick="addStudent()">Add Student</button> </li>
+                <li> <button onclick="delete_student()">Delete Rows</button></li>
+                <li> <button onclick="delete_student_name()">Delete By Name</button></li>
+                <li><button onclick="edit_student()">EDIT STUDENT DETAIL</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let selectedRow = null;
+
+        function addStudent() {
+            let name = document.getElementById('addName').value;
+            let math = parseInt(document.getElementById('addMath').value);
+            let science = parseInt(document.getElementById('addScience').value);
+            let english = parseInt(document.getElementById('addEnglish').value);
+
+            if (name && !isNaN(math) && !isNaN(science) && !isNaN(english)) {
+                let table = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+                let newRow = table.insertRow();
+                newRow.insertCell(0).innerText = name;
+                newRow.insertCell(1).innerText = math;
+                newRow.insertCell(2).innerText = science;
+                newRow.insertCell(3).innerText = english;
+                let total = math + science + english;
+                newRow.insertCell(4).innerText = total;
+                if (total < 40) {
+                    const cell = newRow.insertCell(5);
+                    cell.innerText = "Fail";
+                    cell.style.background = "red";
+                    cell.style.color = "white";
+                } else {
+                    const cell = newRow.insertCell(5);
+                    cell.innerText = "Pass";
+                    cell.style.background = "green";
+                    cell.style.color = "white";
+                }
+                newRow.addEventListener('click', function() {
+                    selectRow(this);
+                });
+
+                // Clear input fields
+                document.getElementById('addName').value = '';
+                document.getElementById('addMath').value = '';
+                document.getElementById('addScience').value = '';
+                document.getElementById('addEnglish').value = '';
+            } else {
+                alert('Please fill in all fields with valid numbers.');
+            }
+        }
+
+        function delete_student() {
+            let table = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+            let rows = table.rows.length;
+            if (rows > 0) {
+                table.deleteRow(rows - 1);
+                selectedRow = null;
+            } else {
+                alert('No more students to delete.');
+            }
+        }
+
+        function delete_student_name() {
+            let name = document.getElementById('addName').value;
+            let table = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+            let rows = table.rows.length;
+            let found = false;
+            for (let i = 0; i < rows; i++) {
+                let row = table.rows[i];
+                if (row.cells[0].innerText === name) {
+                    table.deleteRow(i);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                alert('Student not found.');
+            }
+            document.getElementById('addName').value = "";
+        }
+
+        function edit_student() {
+            if (selectedRow) {
+                let name = document.getElementById('addName').value;
+                let math = parseInt(document.getElementById('addMath').value);
+                let science = parseInt(document.getElementById('addScience').value);
+                let english = parseInt(document.getElementById('addEnglish').value);
+
+                if (name && !isNaN(math) && !isNaN(science) && !isNaN(english)) {
+                    selectedRow.cells[0].innerText = name;
+                    selectedRow.cells[1].innerText = math;
+                    selectedRow.cells[2].innerText = science;
+                    selectedRow.cells[3].innerText = english;
+                    let total = math + science + english;
+                    selectedRow.cells[4].innerText = total;
+                    if (total < 40) {
+                        selectedRow.cells[5].innerText = "Fail";
+                        selectedRow.cells[5].style.background = "red";
+                        selectedRow.cells[5].style.color = "white";
+                    } else {
+                        selectedRow.cells[5].innerText = "Pass";
+                        selectedRow.cells[5].style.background = "green";
+                        selectedRow.cells[5].style.color = "white";
+                    }
+
+                    // Clear input fields
+                    document.getElementById('addName').value = '';
+                    document.getElementById('addMath').value = '';
+                    document.getElementById('addScience').value = '';
+                    document.getElementById('addEnglish').value = '';
+
+                    selectedRow.classList.remove('selected');
+                    selectedRow = null;
+                } else {
+                    alert('Please fill in all fields with valid numbers.');
+                }
+            } else {
+                alert('Please select a row to edit.');
+            }
+        }
+
+        function selectRow(row) {
+            if (selectedRow) {
+                selectedRow.classList.remove('selected');
+            }
+            selectedRow = row;
+            selectedRow.classList.add('selected');
+
+            document.getElementById('addName').value = row.cells[0].innerText;
+            document.getElementById('addMath').value = row.cells[1].innerText;
+            document.getElementById('addScience').value = row.cells[2].innerText;
+            document.getElementById('addEnglish').value = row.cells[3].innerText;
+        }
+    </script>
+
+</body>
+
+</html>

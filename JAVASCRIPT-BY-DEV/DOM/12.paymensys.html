@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Processing Simulation</title>
+    <style>
+        #myButton {
+            padding: 10px 20px;
+            background-color: blue; /* Initial color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 2s; /* Smooth transition for color fade */
+        }
+        #myButton.processing {
+            background-color: gray; /* Color when processing */
+            cursor: wait;
+        }
+        #progressContainer {
+            width: 96%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+            display: none;
+        }
+        #progressBar {
+            height: 20px;
+            width: 0%;
+            background-color: green;
+            transition: width 0.1s;
+        }
+        #progressBar.failed {
+            background-color: rgb(245, 18, 2); /* Red color for failed state */
+        }
+        #message {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        #message.success {
+            color: green; /* Success message color */
+        }
+        #message.error {
+            color: red; /* Error message color */
+        }
+
+        #payment {
+            margin: auto;
+            background-color: rgb(197, 196, 196);
+            width: 30%;
+            padding: 50px;
+        }
+        .detail{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        #payment input{
+            padding: 10px;
+        }
+        #payment label{
+            font-size: 1.1em;
+        }
+        #re{
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            width: 100%;
+            /* border: 1px solid gray; */
+            
+        }
+        .alert{
+            padding: 10px;
+            margin: auto;
+            border: 1px solid rgb(223, 220, 220);
+        }
+        .status_s{
+            color: green;
+        }
+        .status_f{
+            color: rgb(241, 7, 7);
+        }
+        #download{
+            padding: 10px;
+            outline: none;
+            background-color: green;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+
+<section id="payment">
+    <h2>Payment Processing Simulation</h2>
+    
+
+    <div class="detail">
+        <div>
+            <label for="username">Name :</label>
+            <input type="text" id="username" placeholder="Enter your name">
+        </div>
+        <div>
+            <label for="priceInput">Payment :</label>
+            <input type="number" id="priceInput" min="0" step="0.01" placeholder="Enter price here">
+        </div>
+        
+        
+    </div>
+    
+    <div id="progressContainer">
+        <div id="progressBar"></div>
+    </div>
+    <div id="message"></div>
+    <button id="myButton">Pay <b id="p"></b></button>
+    <br>
+    <br>
+
+    <div id="re"></div>
+</section>
+
+
+
+
+<script>
+    let initbtn = true;
+    const re = document.getElementById('re')
+    const p = document.getElementById('p');
+    const button = document.getElementById('myButton');
+    const progressBar = document.getElementById('progressBar');
+    const message = document.getElementById('message');
+    const priceInput = document.getElementById('priceInput');
+    const progressContainer = document.getElementById('progressContainer');
+
+    priceInput.addEventListener('input', function() {
+        const price = priceInput.value;
+        p.innerHTML = price;
+    });
+
+    function trans_id(){
+    
+        let id = Math.floor(Math.random() * 10000000000000
+        + 1);
+        return id;
+    }
+
+
+    function current_time(){
+        return new Date().toLocaleDateString()
+
+    }
+
+    function handleClick(event) {
+        // data=trans_id()
+        const username = document.getElementById('username').value;
+        const price = parseFloat(priceInput.value);
+
+        if (isNaN(price) || price <= 0) {
+            message.textContent = 'Please enter a valid price';
+            message.className = 'error';
+            progressBar.style.width = '0%';
+            progressBar.className = '';
+            button.style.backgroundColor = 'blue';
+            return;
+        }
+        if (!username) {
+            message.textContent = 'Please enter a valid username';
+            message.className = 'error';
+            progressBar.style.width = '0%';
+            progressBar.className = '';
+            button.style.backgroundColor = 'blue';
+            return;
+        }
+        progressContainer.style.display = 'block';
+
+        button.classList.add('processing');
+        button.disabled = true;
+        message.textContent = 'Payment is processing...';
+        message.className = '';
+        console.log('Button disabled for processing');
+        progressContainer.style.display = 'block';
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 2;
+            progressBar.style.width = `${progress}%`;
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                button.classList.remove('processing');
+
+                if (price < 100) {
+                    progressBar.className = 'failed';
+                    message.textContent = 'Payment failed. Price is less than $100. Please Refresh Page';
+                    message.className = 'error';
+                    button.style.backgroundColor = 'red';
+                    button.innerText = "Payment Failed";
+                    initbtn = false;
+                    payment_status='Failed'
+                    re.innerHTML=`
+                    <div class="alert">
+                    
+                                    <h2 class="card-title">Payment Details</h5>
+                                    
+                                    <p class="card-text">Name: ${username} <br></p>
+                                    <p class="card-text">Price: ${price}/- <br></p>
+                                    <p class="card-text">Trans Id: ${trans_id()} <br></p>
+                                    <p class="card-text">Time: ${current_time()} <br> </p>
+                                    <p class="status_f">Status: ${payment_status}<br></p>
+                                    <button id="download">Download</button>
+
+                                    
+                        </div>
+                                    
+                    `
+                } else {
+                    button.disabled = false;
+                    button.style.backgroundColor = 'green';
+                    message.textContent = 'Payment processed successfully!';
+                    message.className = 'success';
+                    button.innerText = "Payment Completed";
+                    button.disabled='true';
+                    button.style.cursor="not-allowed"
+                    payment_status='Successful'
+
+                    re.innerHTML=`
+            
+                    <div class="alert">
+                    
+                                    <h2 class="card-title">Payment Details</h5>
+                                    
+                                    <p class="card-text">Name: ${username} <br></p>
+                                    <p class="card-text">Price: ${price}/- <br></p>
+                                    <p class="card-text">Trans Id: ${trans_id()} <br></p>
+                                    <p class="card-text">Time: ${current_time()} <br> </p>
+                                    <p class="status_s">Status: ${payment_status}<br></p>
+                                    <button id="download">Download</button>
+
+                                    
+                        </div>
+                                    
+                    `
+
+                    document.getElementById('priceInput').value = "";
+                    document.getElementById('username').value = "";
+                }
+
+                setTimeout(() => {
+                    button.style.backgroundColor = initbtn ? 'green' : 'red';
+                }, 2000);
+
+                console.log('Payment processing complete');
+            }
+        }, 100);
+    }
+
+    button.addEventListener('click', handleClick);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!-- Event listeners are fundamental in creating interactive and dynamic web applications by allowing you to respond to user actions and other events. -->
+
+
+<!-- An event listener in JavaScript is a function that waits for a specific event to occur on a particular element and executes a piece of code when that event is triggered. It allows you to respond to user interactions or other events in the web page, such as clicks, mouse movements, key presses, or form submissions. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disable and Re-enable Button</title>
+    <style>
+        #myButton {
+            padding: 10px 20px;
+            background-color: blue; /* Initial color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #myButton.disabled {
+            background-color: red; /* Color when disabled */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<button id="myButton">Click Me!</button>
+
+<script>
+    const button = document.getElementById('myButton');
+
+    function handleClick(event) {
+        alert('Button clicked!');
+        
+        // Change button color to red and disable it
+        button.classList.add('disabled');
+        button.disabled = true;
+        alert('Event listener removed');
+        
+        // Remove the event listener
+        button.removeEventListener('click', handleClick);
+        
+        // Re-enable the button and change its color after 5 seconds
+        setTimeout(() => {
+            button.classList.remove('disabled');
+            button.disabled = false;
+            button.addEventListener('click', handleClick);
+            button.style.backgroundColor = 'blue'; // Change color to green
+            console.log('Event listener re-added');
+        }, 5000);
+    }
+
+    // Add the event listener initially
+    button.addEventListener('click', handleClick);
+</script>
+
+</body>
+</html>

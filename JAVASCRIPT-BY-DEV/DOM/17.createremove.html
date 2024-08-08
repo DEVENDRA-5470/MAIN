@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+</style>
+
+<body>
+
+
+
+    <script>
+        let header = document.createElement('header')
+        document.body.appendChild(header)
+        let nav = document.createElement('nav')
+        header.appendChild(nav)
+        nav.style.display = "flex";
+        nav.style.justifyContent = "space-around"
+        nav.style.alignItems = "center"
+        nav.style.background = 'rgba(2, 121, 95, 0.992)'
+        nav.style.color = "white"
+        nav.style.padding = "10px"
+
+        let div_logo = document.createElement('div')
+        nav.appendChild(div_logo)
+        div_logo.className = "logo"
+        let logo_name = document.createElement('h2')
+        div_logo.appendChild(logo_name)
+        logo_name.innerText = "Dreamer"
+
+        // Create the menu container
+        let menu_div = document.createElement('div');
+        let ul = document.createElement('ul');
+        ul.style.listStyle = "none";
+        ul.style.display = "inline-flex";
+        menu_div.appendChild(ul);
+        nav.appendChild(menu_div);
+
+        // Define the menu items and their respective href values
+        const menuItems = [
+            { name: "Home", href: "https://dreamerinfotech.in/home" },
+            { name: "About", href: "https://dreamerinfotech.in/about" },
+            { name: "Service", href: "https://dreamerinfotech.in/service" },
+            { name: "Contact", href: "https://dreamerinfotech.in/contact" },
+            { name: "Blogs", href: "https://dreamerinfotech.in/blogs" }
+        ];
+
+
+        menuItems.forEach((item, i) => {
+            let li = document.createElement('li');
+            li.style.margin = "10px"
+            let a = document.createElement('a');
+            a.textContent = item.name;
+            a.style.textDecoration = "none";
+            a.style.color = "white";
+            a.setAttribute('href', item.href);
+            li.appendChild(a);
+            ul.appendChild(li);
+            if (i == 4) {
+                // ul.removeChild(li)
+                ul.prepend(li)
+            }
+        });
+
+
+
+    </script>
+</body>
+
+</html>

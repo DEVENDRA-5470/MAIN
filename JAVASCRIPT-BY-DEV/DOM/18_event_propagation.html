@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Propagation Example</title>
+</head>
+<body>
+    <div id="parent">
+        <button id="child">Click me!</button>
+    </div>
+
+    <script>
+        // Capturing Phase
+        document.body.addEventListener('click', () => {
+            console.log('Body Capturing Phase');
+        }, true);
+
+        document.getElementById('parent').addEventListener('click', () => {
+            console.log('Parent Capturing Phase');
+        }, true);
+
+        document.getElementById('child').addEventListener('click', () => {
+            console.log('Child Clicked');
+        });
+
+        // Bubbling Phase
+        document.getElementById('parent').addEventListener('click', () => {
+            console.log('Parent Bubbling Phase');
+        });
+
+        document.body.addEventListener('click', () => {
+            console.log('Body Bubbling Phase');
+        });
+    </script>
+</body>
+</html>

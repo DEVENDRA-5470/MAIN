@@ -6,45 +6,105 @@
 <title>Text Analyzer</title>
 <style>
   body {
+    color: white;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #02785cfb;
   }
 
   .container {
     text-align: center;
+    position: relative;
   }
 
   h1 {
-    color: #333;
+    color: #f5f7f8;
   }
 
   #randomTextArea {
-    margin-top: 20px;
+    outline: none;
+    border: none;
+    margin-top: 0px;
     padding: 10px;
-    border: 2px solid #333;
     font-size: 16px;
-    width: 300px;
-    height: 150px;
+    width: 900px;
+    height: 300px;
     resize: none; /* Prevent textarea from being resizable */
   }
 
   #stats {
-    margin-top: 20px;
-    font-size: 14px;
     text-align: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    font-size: 19px;
+    line-height: 10px;
+    margin-top: 20px;
+  }
+
+  #charCount {
+    margin-top: 10px;
+    font-size: 19px;
+    color: white;
+  }
+
+  #progressBar {
+    width: 100%;
+    background-color: #ffffff;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  #progressBar div {
+    height: 100%;
+    text-align: right;
+    padding-right: 10px;
+    line-height: 20px;
+    color: white;
+    background-color: #04b275;
+  }
+
+  #resetButton {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #650101;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  #resetButton:hover {
+    background-color: #73e40a;
   }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Text Analyzer</h1>
-  <textarea id="randomTextArea"></textarea>
-  <div id="stats"></div>
+  <form action="">
+  <button type="reset" id="resetButton">Reset</button>
+  <textarea id="randomTextArea" maxlength="500"></textarea>
+</form>
+  <div id="charCount">0 / 500</div>
+  <div id="progressBar">
+    <div id="progress" style="width: 0%;"></div>
+  </div>
+  <div id="stats">
+    <p>Total character count (with spaces): 0</p>
+    <p>Total character count (without spaces): 0</p>
+    <p>Word count: 0</p>
+    <p>Space count: 0</p>
+    <p>Uppercase letter count: 0</p>
+    <p>Lowercase letter count: 0</p>
+  </div>
 </div>
 
 <script>
@@ -53,20 +113,50 @@
     const text = document.getElementById('randomTextArea').value;
 
     // Counting letters, words, and spaces
-    const letterCount = text.replace(/\s/g, '').length;
-    const wordCount = text.trim().split(/\s+/).filter(word => word !== '').length;
-    const spaceCount = text.split(' ').length - 1;
+    const totalCharacterCount = text.length; // Total characters including spaces
+    const letterCount = text.replace(/\s/g, '').length; // Total characters excluding spaces
+    const wordCount = text.trim().split(/\s+/).filter(word => word !== '').length; // Total words
+    const spaceCount = (text.match(/\s/g) || []).length; // Total spaces
+
+    // Counting uppercase and lowercase letters
+    const upperCaseCount = (text.match(/[A-Z]/g) || []).length;
+    const lowerCaseCount = (text.match(/[a-z]/g) || []).length;
+
+    // Displaying character count
+    document.getElementById('charCount').innerHTML = `${totalCharacterCount} / 500`;
+
+    // Updating progress bar
+    const progress = (totalCharacterCount / 500) * 100;
+    document.getElementById('progress').style.width = `${progress}%`;
 
     // Displaying statistics
-    document.getElementById('stats').innerHTML = `
-      <p>Letter count: ${letterCount}</p>
-      <p>Word count: ${wordCount}</p>
-      <p>Space count: ${spaceCount}</p>
-    `;
+    const statsElements = document.querySelectorAll('#stats p');
+    statsElements[0].innerHTML = `Total character count (with spaces): ${totalCharacterCount}`;
+    statsElements[1].innerHTML = `Total character count (without spaces): ${letterCount}`;
+    statsElements[2].innerHTML = `Word count: ${wordCount}`;
+    statsElements[3].innerHTML = `Space count: ${spaceCount}`;
+    statsElements[4].innerHTML = `Uppercase letter count: ${upperCaseCount}`;
+    statsElements[5].innerHTML = `Lowercase letter count: ${lowerCaseCount}`;
+  }
+
+  // Function to reset statistics
+  function resetText() {
+    document.getElementById('charCount').innerHTML = '0 / 500';
+    const statsElements = document.querySelectorAll('#stats p');
+    statsElements.forEach(stat => {
+      stat.innerHTML = stat.innerHTML.split(':')[0] + ': 0';
+    });
+    document.getElementById('progress').style.width = '0%'; // Reset progress bar
   }
 
   // Add event listener to the textarea for input change
-  document.getElementById('randomTextArea').addEventListener('input', analyzeText);
+  document.getElementById('randomTextArea').addEventListener('input', function() {
+    resetText(); // Reset statistics on input change
+    analyzeText(); // Analyze text after resetting
+  });
+
+  // Add event listener to the reset button for click event
+  document.getElementById('resetButton').addEventListener('click', resetText);
 
   // Initial call to analyzeText to display initial statistics
   analyzeText();

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        /* flex-wrap: wrap; */
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    .trans-box{
+        height: 100px;
+        margin-left: 20px;
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        color: #fff;
+    }
+    .c{
+        margin-left: 20px;
+        width: 150px;
+        transition: all 1s linear;
+
+
+    }
+    .translate{
+        transition: all 1s linear;
+
+        background-color: red;
+    }
+    .translate:hover{
+        /* transform: translate(50px,20px); */
+        transform: translate3d(50px,-20px,100px);
+    }
+    .rotate{
+        background-color: blue;
+
+    }
+    .rotate:hover{
+        /* transform: rotateX(90deg); */
+        /* transform: rotateY(90deg); */
+        transform: rotate3d(1,1,0,75deg);
+    }
+    .scale{
+        background-color: green;
+        
+    }
+    .scale:hover{
+        /* transform: scale(1.6); */
+        /* transform: scale3d(1.6,1,1.7); */
+        /* transform: scaleX(1.7); */
+        transform: scaleY(1.7);
+
+    }
+    .skew{
+        background-color: maroon;
+    }
+    .skew:hover{
+        transform: skew(10deg, 50deg);
+    }
+    
+</style>
+
+<body>
+    <div class="trans-box">
+        <div class="c skew">Skew</div>
+        <div class="c translate">Translate</div>
+        <div class="c rotate">Rotate</div>
+        <div class="c scale">Scale</div>
+    </div>
+</body>
+</html>
