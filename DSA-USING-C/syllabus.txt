@@ -1,0 +1,99 @@
+Understood. Here’s the revised roadmap with functions covered before recursion:
+
+### **Month 1: C Basics, Functions, and Recursion**
+
+**Week 1: C Programming Basics**
+- **Day 1-3:** Review C syntax, data types, operators, and control structures (if, switch, loops).
+- **Day 4-7:** Practice basic C programming exercises (e.g., simple calculations, basic I/O operations).
+
+**Week 2: Functions**
+- **Day 1-2:** Learn about function declaration, definition, and calling. Understand scope and lifetime of variables.
+- **Day 3-4:** Practice writing and using functions (e.g., passing arguments, return values).
+- **Day 5-7:** Implement functions for common tasks and solve problems that require function usage (e.g., modular code, recursion in functions).
+
+**Week 3-4: Recursion**
+- **Day 1-2:** Understand the concept of recursion, base cases, and recursive calls.
+- **Day 3-4:** Practice writing basic recursive functions (e.g., factorial, Fibonacci, Tower of Hanoi).
+- **Day 5-7:** Solve problems involving recursion (e.g., recursive backtracking problems, maze solving).
+
+### **Month 2: Arrays, Linked Lists, and Stacks**
+
+**Week 1: Arrays**
+- **Day 1-2:** Learn about array declaration, initialization, and basic operations.
+- **Day 3-5:** Implement problems like reversing an array, finding the maximum/minimum, and merging arrays.
+- **Day 6-7:** Review and practice problems involving multidimensional arrays.
+
+**Week 2-3: Linked Lists**
+- **Day 1-2:** Understand singly linked lists and their operations (insertion, deletion, traversal).
+- **Day 3-4:** Implement singly linked lists and practice problems.
+- **Day 5-7:** Study doubly linked lists and circular linked lists; implement and practice operations.
+
+**Week 4: Stacks**
+- **Day 1-2:** Learn about stack operations and implementation using arrays.
+- **Day 3-4:** Implement stack operations (push, pop, peek) and practice stack-related problems.
+- **Day 5-7:** Study stack implementation using linked lists and practice problems.
+
+### **Month 3: Queues and Trees**
+
+**Week 1: Queues**
+- **Day 1-2:** Understand queue operations and implementation using arrays.
+- **Day 3-4:** Implement circular queues and practice problems.
+- **Day 5-7:** Study priority queues and their implementation; solve related problems.
+
+**Week 2-3: Trees**
+- **Day 1-2:** Study binary trees and their traversal methods (in-order, pre-order, post-order).
+- **Day 3-5:** Implement basic tree operations (insertion, deletion, searching).
+- **Day 6-7:** Explore binary search trees (BST) and AVL trees; implement operations.
+
+**Week 4: Advanced Tree Concepts**
+- **Day 1-2:** Study balanced trees and B-trees.
+- **Day 3-5:** Implement and practice operations on AVL trees and red-black trees.
+- **Day 6-7:** Review and solve advanced tree problems.
+
+### **Month 4: Graphs and Hashing**
+
+**Week 1-2: Graphs**
+- **Day 1-2:** Learn about graph representations (adjacency matrix, adjacency list).
+- **Day 3-4:** Implement graph traversal algorithms (BFS, DFS).
+- **Day 5-7:** Solve problems involving graph traversal.
+
+**Week 3: Graph Algorithms**
+- **Day 1-2:** Study shortest path algorithms (Dijkstra’s, Bellman-Ford).
+- **Day 3-4:** Implement shortest path algorithms and solve related problems.
+- **Day 5-7:** Study minimum spanning tree algorithms (Kruskal’s, Prim’s) and implement them.
+
+**Week 4: Hashing**
+- **Day 1-2:** Understand hash tables, hash functions, and collision resolution techniques.
+- **Day 3-5:** Implement a hash table and solve problems related to hashing.
+- **Day 6-7:** Practice problems involving hash maps and collision handling.
+
+### **Month 5: Heaps and Advanced Data Structures**
+
+**Week 1-2: Heaps**
+- **Day 1-2:** Study binary heaps, min-heaps, and max-heaps.
+- **Day 3-4:** Implement heap operations and heap sort.
+- **Day 5-7:** Solve problems involving heaps and heap-based algorithms.
+
+**Week 3: Trie**
+- **Day 1-2:** Learn about trie data structures and their operations.
+- **Day 3-4:** Implement a trie and solve problems related to string searches.
+- **Day 5-7:** Practice problems involving prefix matching and autocomplete.
+
+**Week 4: Dynamic Programming**
+- **Day 1-2:** Understand dynamic programming principles and memoization.
+- **Day 3-4:** Solve classic DP problems (knapsack problem, longest common subsequence).
+- **Day 5-7:** Practice more advanced DP problems and optimizations.
+
+### **Month 6: Final Review and Practice**
+
+**Week 1-2: Comprehensive Practice**
+- **Day 1-3:** Solve a variety of problems on platforms like LeetCode, HackerRank, or CodeSignal.
+- **Day 4-7:** Focus on mixed problems and review any challenging topics.
+
+**Week 3: Mock Interviews**
+- **Day 1-3:** Take mock interviews to simulate real interview conditions.
+- **Day 4-7:** Review feedback from mock interviews, focus on optimizing solutions, and improving problem-solving speed.
+
+**Week 4: Final Adjustments**
+- **Day 1-2:** Reflect on your progress and adjust your preparation based on any remaining weaknesses.
+- **Day 3-7:** Make final preparations, review notes, and practice a few final problems to stay sharp.
