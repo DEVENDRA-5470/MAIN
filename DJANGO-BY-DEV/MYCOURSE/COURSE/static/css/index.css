@@ -1,0 +1,11 @@
+.zoom {
+    transition: transform 0.3s ease;
+}
+
+.zoom:hover {
+    transform: scale(1.03); /* Adjust the scale value as needed */
+}
+li a{
+    color: blue;
+}
+

@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="flex  w-full p-1">
+    <!-- main form --> 
+    <form method="post" id="main" class="max-w-sm ml-1 border p-5  rounded-lg w-1/2" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="mb-5 ">
+          <label for="customer-ac-no" class="block mb-2 text-sm font-medium text-black-900 dark:text-black">Customer Ac No.</label>
+          {{form.cus_acc_no}}
+      </div>
+      <div class="mb-5 ">
+          <label for="customer-name" class="block mb-2 text-sm font-medium text-black-900 dark:text-black">Customer Image</label>
+          {{form.cus_img}}
+      </div>
+      <div class="mb-5 ">
+          <label for="customer-name" class="block mb-2 text-sm font-medium text-black-900 dark:text-black">Customer Mobile</label>
+          {{form.cus_mob}}
+      </div>
+      <div class="mb-5 ">
+          <label for="customer-name" class="block mb-2 text-sm font-medium text-black-900 dark:text-black">Customer Name</label>
+          {{form.cus_name}}
+      </div>
+      <div class="mb-5 ">
+          <label for="customer-name" class="block mb-2 text-sm font-medium text-black-900 dark:text-black">Customer Balance</label>
+          {{form.cus_balance}}
+      </div>
+     
+     
+      <div class="flex gap-2 justify-between">
+        <!-- <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none  font-medium rounded-lg text-sm px-1 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create Account</button> -->
+    </div>
+    <div class="flex gap-2 justify-between">
+        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-1 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            {% if obj %} 
+            Update Account 
+            {% else %} 
+            Create Account 
+            {% endif %}
+        </button>
+    </div>
+  </form>
+
+
+<div class="relative overflow-x-auto shadow-xl w-full ml-2 mt-2" style="max-height: 500px; overflow-y: auto; ">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs bg-blue-600 uppercase bg-gray-50 dark:bg-blue-700 dark:text-white text-center"style="position: sticky; top: 0;">
+            <tr >
+                <th scope="col" class="px-6 py-3">
+                    Customer Ac
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Customer Image
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Customer Name 
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Mobile
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Balance
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                  Created
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Updated
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            
+            <tr class="bg-white text-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{i.cus_acc_no}}
+                </th>
+                {% if i.cus_img %}
+                <td class="px-6 py-4">
+                    <img src="{{i.cus_img.url}}" alt="missing">
+                </td>
+                {% else %}
+                <td class="px-6 py-4">
+                    <img src="" alt="missing">
+                </td>
+                {% endif %}
+                <td class="px-6 py-4">
+                    {{i.cus_name}}
+                </td>
+                <td class="px-6 py-4">
+                    {{i.cus_mob}}
+                </td>
+                <td class="px-6 py-4">
+                    {{i.cus_balance}}
+                </td>
+                <td class="px-6 py-4">
+                    {{i.cus_created_at}}
+                </td>
+                <td class="px-6 py-4">
+                    {{i.cus_updated_at}}
+                </td>
+                <td class="px-6 text-center mt-4">
+                    <a href="{% url 'edit_customer' i.id %}" class="focus:outline-none text-white bg-green-700  focus:ring-4 focus:ring-green-300 font-medium rounded text-sm px-5 w-full py-1 me-2 mb-2 dark:bg-green-500  dark:focus:ring-green-800 inline-block">Edit</a>
+                    
+                    <form method="POST" action="{% url 'delete_customer' i.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="focus:outline-none text-white bg-red-600  focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-1 me-2 mb-2 w-full dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-green-800 inline-block">Delete</button>
+                    </form>
+                
+                    <a href="{% url 'deposite_amount' i.id %}" class="focus:outline-none text-white bg-green-700  focus:ring-4 focus:ring-green-300 font-medium rounded text-sm px-5 w-full py-1 me-2 mb-2 dark:bg-blue-600  dark:focus:ring-green-800 inline-block">Deposit</a>
+                
+                    <a href="{% url 'withdraw_amount' i.id %}" class="focus:outline-none text-white bg-green-700  focus:ring-4 focus:ring-green-300 font-medium rounded text-sm px-5 w-full py-1 me-2 mb-2 dark:bg-yellow-400  dark:focus:ring-green-800 inline-block">Withdraw</a>
+                </td>
+                
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+
+  </div>
+  {% include "footer.html" %}
+{% endblock content %}
