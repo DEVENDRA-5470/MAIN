@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="text-white bg-blue-500 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+          <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-blue-500 rounded-full" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="ml-3 text-xl text-white">New Hotel</span>
+          </a>
+          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+            <a class="mr-5 hover:text-gray-900">First Link</a>
+            <a class="mr-5 hover:text-gray-900">Second Link</a>
+            <a class="mr-5 hover:text-gray-900">Third Link</a>
+            <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+          </nav>
+          <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+    </header>
+
+    <!-- Form Section -->
+    <div class="mb-24 flex items-start mt-8 justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-5xl">
+            <!-- Flex Container for Three Forms -->
+            <div class="flex flex-col md:flex-row justify-between space-x-4">
+                
+                <!-- Guest Information -->
+                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                    <h2 class="text-lg font-bold text-center text-gray-800 mb-4">Guest Information</h2>
+                    
+                    <form>
+                        <!-- Full Name -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="full-name" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="Enter your full name" required>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="Enter your email address" required>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="Enter your phone number" required>
+                        </div>
+
+                        <!-- ID/Passport Number -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="id-passport">ID/Passport Number</label>
+                            <input type="text" id="id-passport" name="id-passport" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="ID/Passport Number" required>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Booking Information -->
+                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                    <h2 class="text-lg font-bold text-center text-gray-800 mb-4">Booking Information</h2>
+                    
+                    <form>
+                        <!-- Check-in Date -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="checkin-date">Check-in Date</label>
+                            <input type="date" id="checkin-date" name="checkin-date" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" required>
+                        </div>
+
+                        <!-- Check-out Date -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="checkout-date">Check-out Date</label>
+                            <input type="date" id="checkout-date" name="checkout-date" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" required>
+                        </div>
+
+                        <!-- Number of Guests -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="guests">Number of Guests (Adults/Children)</label>
+                            <input type="number" id="guests" name="guests" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="Enter number of guests" required>
+                        </div>
+
+                        <!-- Room Type -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="room-type">Room Type</label>
+                            <select id="room-type" name="room-type" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" required>
+                                <option value="single">Single</option>
+                                <option value="double">Double</option>
+                                <option value="suite">Suite</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Payment Information -->
+                <div class="w-full md:w-1/3">
+                    <h2 class="text-lg font-bold text-center text-gray-800 mb-4">Payment Information</h2>
+                    
+                    <form>
+                        <!-- Total Amount -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="total-amount">Total Amount</label>
+                            <input type="number" id="total-amount" name="total-amount" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="Enter total amount" required>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="payment-method">Payment Method</label>
+                            <select id="payment-method" name="payment-method" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" required>
+                                <option value="credit-card">Credit Card</option>
+                                <option value="debit-card">Debit Card</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+
+                        <!-- Transaction ID -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="transaction-id">Transaction ID</label>
+                            <input type="text" id="transaction-id" name="transaction-id" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="Enter transaction ID" required>
+                        </div>
+
+                        <!-- Billing Address -->
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-medium mb-1" for="billing-address">Billing Address</label>
+                            <input type="text" id="billing-address" name="billing-address" class="w-full px-2 py-1 border rounded-md text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm" placeholder="Enter billing address" required>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-right mt-6">
+                <button type="submit" class="w-1/4 bg-blue-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-2">
+        <div class="container mx-auto text-center text-sm">
+            <p>&copy; 2024 Hotel Booking. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
